@@ -3,6 +3,7 @@ package com.example.calculator;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -15,7 +16,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btn_tree, btn_plus, btn_zero, btn_dote, btn_equals;
     EditText edit_textExp;
     RecyclerView recyView;
-
     LinearLayout linearLayout;
 
 
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FindIds();
+        //SetAction();
 
         btn_zero.setOnClickListener(this);
         btn_one.setOnClickListener(this);
@@ -43,14 +44,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_multi.setOnClickListener(this);
         btn_sub.setOnClickListener(this);
         btn_plus.setOnClickListener(this);
-
         btn_dote.setOnClickListener(this);
 
         //resolver o problema de não apagar o zero ao começar a digitar
         btn_ac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edit_textExp.setText("0");
+                edit_textExp.setText(" ");
             }
         });
 
@@ -64,10 +64,97 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void SetExpre(String string, boolean id){
+//    public void SetAction(){
+//        btn_plus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String result = String.valueOf(edit_textExp.getText());
+//                btn_plus.setBackgroundColor(getColor(R.color.back3));
+//                System.out.println(result);
+//            }
+//        });
+//
+//        btn_sub.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String result1 = String.valueOf(edit_textExp.getText());
+//                btn_plus.setBackgroundColor(getColor(R.color.back3));
+//                System.out.println(result1);
+//            }
+//        });
+//    }
+
+    public void SetExpre(String string, boolean id, char op){
 
         if(id){
             edit_textExp.append(string);
+        }
+
+        if(btn_plus.isPressed()){
+            String result = String.valueOf(edit_textExp.getText());
+            btn_plus.setImageResource(R.drawable.pluspress);
+            System.out.println(result);
+            edit_textExp.setText(result + "+");
+
+        }else{
+            String newOp = String.valueOf(edit_textExp.getText());
+            btn_plus.setImageResource(R.drawable.mais);
+            System.out.println(newOp);
+        }
+
+
+        if (btn_sub.isPressed()) {
+            String result = String.valueOf(edit_textExp.getText());
+            btn_sub.setImageResource(R.drawable.subpress);
+            System.out.println(result);
+            edit_textExp.setText(result + "-");
+
+        }else{
+            String newOp = String.valueOf(edit_textExp.getText());
+            btn_sub.setImageResource(R.drawable.menos);
+            System.out.println(newOp);
+        }
+
+
+        if (btn_multi.isPressed()) {
+            String result = String.valueOf(edit_textExp.getText());
+            btn_multi.setImageResource(R.drawable.mulpress);
+            System.out.println(result);
+            edit_textExp.setText(result + "*");
+
+        }else{
+            String newOp = String.valueOf(edit_textExp.getText());
+            btn_multi.setImageResource(R.drawable.vezes);
+            System.out.println(newOp);
+        }
+
+        if (btn_divi.isPressed()) {
+            String result = String.valueOf(edit_textExp.getText());
+            btn_divi.setImageResource(R.drawable.divipress);
+            System.out.println(result);
+            edit_textExp.setText(result + "/");
+        }else{
+            String newOp = String.valueOf(edit_textExp.getText());
+            btn_divi.setImageResource(R.drawable.divi);
+            System.out.println(newOp);
+        }
+
+        if (btn_porce.isPressed()) {
+            String result = String.valueOf(edit_textExp.getText());
+            btn_porce.setImageResource(R.drawable.porcepress);
+            System.out.println(result);
+            edit_textExp.setText(result + "%");
+        }else{
+            String newOp = String.valueOf(edit_textExp.getText());
+            btn_porce.setImageResource(R.drawable.porce);
+            System.out.println(newOp);
+        }
+
+        if (btn_dote.isPressed()) {
+            String result = String.valueOf(edit_textExp.getText());
+            //btn_dote.setImageResource(R.drawable.dotepress);
+            System.out.println(result);
+            edit_textExp.setText(result + ".");
         }
     }
 
@@ -105,38 +192,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         int id = view.getId();
         if (id == R.id.btn_zero) {
-            SetExpre("0", true);
+            SetExpre("0", true, '0');
         } else if (id == R.id.btn_one) {
-            SetExpre("1", true);
+            SetExpre("1", true, '1');
         } else if (id == R.id.btn_two) {
-            SetExpre("2", true);
+            SetExpre("2", true, '2');
         } else if (id == R.id.btn_tree) {
-            SetExpre("3", true);
+            SetExpre("3", true, '3');
         } else if (id == R.id.btn_four) {
-            SetExpre("4", true);
+            SetExpre("4", true, '4');
         } else if (id == R.id.btn_five) {
-            SetExpre("5", true);
+            SetExpre("5", true, '5');
         } else if (id == R.id.btn_six) {
-            SetExpre("6", true);
+            SetExpre("6", true, '6');
         } else if (id == R.id.btn_seven) {
-            SetExpre("7", true);
+            SetExpre("7", true, '7');
         } else if (id == R.id.btn_eight) {
-            SetExpre("8", true);
+            SetExpre("8", true,'8');
         } else if (id == R.id.btn_nine) {
-            SetExpre("9", true);
+            SetExpre("9", true, '9');
         } else if (id == R.id.btn_dote) {
-            SetExpre("0", true);
+            SetExpre(".", false, '.');
         } else if (id == R.id.btn_multi) {
-            SetExpre("*", true);
+            SetExpre("*", false, '*');
         } else if (id == R.id.btn_plus) {
-            SetExpre("+", true);
+            SetExpre("+", false,'+');
         } else if (id == R.id.btn_dive) {
-            SetExpre("/", true);
+            SetExpre("/", false,'/');
         } else if (id == R.id.btn_porce) {
-            SetExpre("%", true);
+            SetExpre("%", false,'%');
         } else if (id == R.id.btn_sub) {
-            SetExpre("-", true);
+            SetExpre("-", false, '-');
         }
+
 
 
 

@@ -34,13 +34,12 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/back"
         android:cursorVisible="true"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:textSize="40sp"
         android:textAlignment="textEnd"
         android:textColor="@color/white"
         android:textCursorDrawable="@color/back3"
         android:focusableInTouchMode="false"
-        android:text="20+5"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         android:layout_marginBottom="26dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -247,7 +246,8 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="@color/back2"
-                    android:src="@drawable/mais" />
+                    android:src="@drawable/mais"
+                    />
 
             </LinearLayout>
 
