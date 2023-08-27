@@ -18,6 +18,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RecyclerView recyView;
     LinearLayout linearLayout;
 
+    String valueOne= "";
+    String valueTwo = "";
+    String newOp = "";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +59,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-//        btn_equals.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
 
     }
 
@@ -69,43 +68,99 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             edit_textExp.append(s);
         }
 
-        String valueOne= "";
-        String valueTwo = "";
-        String newOp = String.valueOf(edit_textExp.getText());
 
-        if (btn_plus.isPressed()) { //vai rodar isso depois de apertar o + então aqui vai guardar o primeiro valor
+
+        if (btn_plus.isPressed() && edit_textExp.length() > 0) { //vai rodar isso depois de apertar o + então aqui vai guardar o primeiro valor
             valueTwo = String.valueOf(edit_textExp.getText()); //1 + 1
-            //newOp = String.valueOf(edit_textExp.getText());
-            //newOp = newOp.replaceAll("[0-9]", "+");
-            btn_plus.setImageResource(R.drawable.pluspress);
-            System.out.println("1 " + valueTwo);
-            edit_textExp.setText(valueTwo + "+");
+            newOp = "+";
             //edit_textExp.setText("");
+//            newOp = String.valueOf(edit_textExp.getText());
+//            newOp = newOp.replaceAll("[0-9]", "+");
+            btn_plus.setImageResource(R.drawable.pluspress);
+            System.out.println("SEGUNDO VALOR " + valueTwo);
+            //edit_textExp.setText(valueTwo + "+");
+            edit_textExp.setText("");
 
-        } else{ //vai rodar isso antes de apertar o + então aqui vai guardar o primeiro valor
+        } else if(edit_textExp.length() > 0){ //vai rodar isso antes de apertar o + então aqui vai guardar o primeiro valor
             valueOne = String.valueOf(edit_textExp.getText()); //1
-            System.out.println("1 " + valueOne);
+            System.out.println("PRIMEIRO VALOR  " + valueOne);
             //String newOp = String.valueOf(edit_textExp.getText());
             btn_plus.setImageResource(R.drawable.mais);
             //edit_textExp.setText("");
         }
 
-        if (btn_sub.isPressed()) {
-            valueTwo = String.valueOf(edit_textExp.getText()); //1 + 1
-            newOp = String.valueOf(edit_textExp.getText());
-            newOp = newOp.replaceAll("0123456789", "-");
-            btn_sub.setImageResource(R.drawable.subpress);
-            System.out.println("1 " + valueTwo);
-            edit_textExp.setText(valueTwo + "+");
-            //edit_textExp.setText("");
+//        if (btn_sub.isPressed()) {
+//            valueTwo = String.valueOf(edit_textExp.getText()); //1 + 1
+////            newOp = String.valueOf(edit_textExp.getText());
+////            newOp = newOp.replaceAll("[0-9]", "-");
+//            btn_sub.setImageResource(R.drawable.subpress);
+//            System.out.println("MENOS " + valueTwo);
+//            //edit_textExp.setText(valueTwo + "+");
+//            edit_textExp.setText("");
+//
+//        } else {
+//            valueOne = String.valueOf(edit_textExp.getText()); //1
+//            System.out.println("MENOS " + valueOne);
+//            //String newOp = String.valueOf(edit_textExp.getText());
+//            btn_sub.setImageResource(R.drawable.menos);
+//        }
 
-        } else {
-            valueOne = String.valueOf(edit_textExp.getText()); //1
-            System.out.println("1 " + valueOne);
-            //String newOp = String.valueOf(edit_textExp.getText());
-            //edit_textExp.setText("");
-            btn_sub.setImageResource(R.drawable.menos);
+
+        if (btn_equals.isPressed()) {
+            if (valueTwo != null && valueOne != null) {
+//                valueOne = valueOne.replaceAll("\\+", "");
+//                valueTwo = valueTwo.replaceAll("\\+", "");
+
+//                System.out.println("entrou");
+//                String newResultPlus = String.valueOf(Integer.parseInt(valueOne) + Integer.parseInt(valueTwo));
+//                edit_textExp.setText(newResultPlus);
+//                System.out.println("foi");
+
+
+                switch (newOp){
+                    case "+":
+                        String newResultPlus = String.valueOf(Integer.parseInt(valueOne) + Integer.parseInt(valueTwo));
+                        edit_textExp.setText(newResultPlus);
+                        System.out.println("foi");
+                        break;
+
+                    case "-":
+                        String newResultMinus = String.valueOf(Integer.parseInt(valueOne) - Integer.parseInt(valueTwo));
+                        edit_textExp.setText(newResultMinus);
+                        System.out.println("foi");
+                        break;
+
+                    default:
+                        System.out.println("Entrou no switch");
+                }
+//                String newResult = String.valueOf(Integer.parseInt(valueOne) + Integer.parseInt(valueOne));
+//                edit_textExp.setText(newResult);
+
+            } else {
+                System.out.println("bosta");
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         if (btn_multi.isPressed()) {
             //String result = String.valueOf(edit_textExp.getText());
@@ -145,40 +200,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        if (btn_equals.isPressed()) {
-            if (valueTwo != null && valueOne != null) {
-                valueOne = valueOne.replaceAll("\\+", "");
-                valueTwo = valueTwo.replaceAll("\\+", "");
 
-                System.out.println("entrou");
-                String newResultPlus = String.valueOf(Integer.parseInt(valueOne) + Integer.parseInt(valueTwo));
-                        edit_textExp.setText(newResultPlus);
-                        System.out.println("foi");
-
-
-//                switch (s){
-//                    case "+":
-//                        String newResultPlus = String.valueOf(Integer.parseInt(valueOne) + Integer.parseInt(valueOne));
-//                        edit_textExp.setText(newResultPlus);
-//                        System.out.println("foi");
-//                        break;
-//
-//                    case "-":
-//                        String newResultMinus = String.valueOf(Integer.parseInt(valueOne) - Integer.parseInt(valueOne));
-//                        edit_textExp.setText(newResultMinus);
-//                        System.out.println("foi");
-//                        break;
-//
-//                    default:
-//                        System.out.println("Entrou no switch");
-//                }
-//                String newResult = String.valueOf(Integer.parseInt(valueOne) + Integer.parseInt(valueOne));
-//                edit_textExp.setText(newResult);
-
-            } else {
-                System.out.println("bosta");
-            }
-        }
 
 
 
@@ -202,6 +224,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            }
 //        }
 //    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //aqui esta todos os ids
     private void FindIds() {
