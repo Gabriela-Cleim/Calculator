@@ -18,13 +18,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RecyclerView recyView;
     LinearLayout linearLayout;
 
+    String valueOne= "";
+    String valueTwo = "";
+    String newOp = "";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FindIds();
-        //SetAction();
 
         btn_zero.setOnClickListener(this);
         btn_one.setOnClickListener(this);
@@ -54,12 +58,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-//        btn_equals.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        btn_equals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.equals();
+            }
+        });
+
 
     }
 
@@ -69,116 +74,81 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             edit_textExp.append(s);
         }
 
-        String valueOne= "";
-        String valueTwo = "";
-        String newOp = String.valueOf(edit_textExp.getText());
-
-        if (btn_plus.isPressed()) { //vai rodar isso depois de apertar o + então aqui vai guardar o primeiro valor
-            valueTwo = String.valueOf(edit_textExp.getText()); //1 + 1
-            //newOp = String.valueOf(edit_textExp.getText());
-            //newOp = newOp.replaceAll("[0-9]", "+");
+        if (btn_plus.isPressed() && edit_textExp.length() > 0) {
+            valueTwo = String.valueOf(edit_textExp.getText());
+            newOp = "+";
             btn_plus.setImageResource(R.drawable.pluspress);
-            System.out.println("1 " + valueTwo);
-            edit_textExp.setText(valueTwo + "+");
-            //edit_textExp.setText("");
+            edit_textExp.setText("");
 
-        } else{ //vai rodar isso antes de apertar o + então aqui vai guardar o primeiro valor
-            valueOne = String.valueOf(edit_textExp.getText()); //1
-            System.out.println("1 " + valueOne);
-            //String newOp = String.valueOf(edit_textExp.getText());
+        } else if(edit_textExp.length() > 0){
+            valueOne = String.valueOf(edit_textExp.getText());
             btn_plus.setImageResource(R.drawable.mais);
-            //edit_textExp.setText("");
         }
 
-        if (btn_sub.isPressed()) {
-            valueTwo = String.valueOf(edit_textExp.getText()); //1 + 1
-            newOp = String.valueOf(edit_textExp.getText());
-            newOp = newOp.replaceAll("0123456789", "-");
+        if (btn_sub.isPressed() && edit_textExp.length() > 0) {
+            valueTwo = String.valueOf(edit_textExp.getText());
+            newOp = "-";
             btn_sub.setImageResource(R.drawable.subpress);
-            System.out.println("1 " + valueTwo);
-            edit_textExp.setText(valueTwo + "+");
-            //edit_textExp.setText("");
+            edit_textExp.setText("");
 
         } else {
-            valueOne = String.valueOf(edit_textExp.getText()); //1
-            System.out.println("1 " + valueOne);
-            //String newOp = String.valueOf(edit_textExp.getText());
-            //edit_textExp.setText("");
+            valueOne = String.valueOf(edit_textExp.getText());
             btn_sub.setImageResource(R.drawable.menos);
         }
 
-        if (btn_multi.isPressed()) {
-            //String result = String.valueOf(edit_textExp.getText());
-            btn_multi.setImageResource(R.drawable.mulpress);
-
-
-        } else {
-            //String newOp = String.valueOf(edit_textExp.getText());
-            btn_multi.setImageResource(R.drawable.vezes);
-            System.out.println(newOp);
-        }
-
-        if (btn_divi.isPressed()) {
-            //String result = String.valueOf(edit_textExp.getText());
-            btn_divi.setImageResource(R.drawable.divipress);
-
-        } else {
-            //String newOp = String.valueOf(edit_textExp.getText());
-            btn_divi.setImageResource(R.drawable.divi);
-            System.out.println(newOp);
-        }
-
-        if (btn_porce.isPressed()) {
-            //String result = String.valueOf(edit_textExp.getText());
+        if (btn_porce.isPressed() && edit_textExp.length() > 0) {
+            valueTwo = String.valueOf(edit_textExp.getText());
+            newOp = "%";
             btn_porce.setImageResource(R.drawable.porcepress);
+            edit_textExp.setText("");
 
         } else {
-            //String newOp = String.valueOf(edit_textExp.getText());
+            valueOne = String.valueOf(edit_textExp.getText());
             btn_porce.setImageResource(R.drawable.porce);
-            System.out.println(newOp);
-        }
-
-        if (btn_dote.isPressed()) {
-            //String result = String.valueOf(edit_textExp.getText());
-
         }
 
 
+        if (btn_multi.isPressed() && edit_textExp.length() > 0) {
+            valueTwo = String.valueOf(edit_textExp.getText());
+            newOp = "*";
+            btn_multi.setImageResource(R.drawable.mulpress);
+            edit_textExp.setText("");
 
-        if (btn_equals.isPressed()) {
-            if (valueTwo != null && valueOne != null) {
-                valueOne = valueOne.replaceAll("\\+", "");
-                valueTwo = valueTwo.replaceAll("\\+", "");
+        } else {
+            valueOne = String.valueOf(edit_textExp.getText());
+            btn_multi.setImageResource(R.drawable.vezes);
+        }
 
-                System.out.println("entrou");
-                String newResultPlus = String.valueOf(Integer.parseInt(valueOne) + Integer.parseInt(valueTwo));
-                        edit_textExp.setText(newResultPlus);
-                        System.out.println("foi");
+        if (btn_divi.isPressed() && edit_textExp.length() > 0) {
+            valueTwo = String.valueOf(edit_textExp.getText());
+            newOp = "/";
+            btn_divi.setImageResource(R.drawable.divipress);
+            edit_textExp.setText("");
 
+        } else {
+            valueOne = String.valueOf(edit_textExp.getText());
+            btn_divi.setImageResource(R.drawable.divi);
+        }
 
-//                switch (s){
-//                    case "+":
-//                        String newResultPlus = String.valueOf(Integer.parseInt(valueOne) + Integer.parseInt(valueOne));
-//                        edit_textExp.setText(newResultPlus);
-//                        System.out.println("foi");
-//                        break;
+//        if (btn_porce.isPressed()) {
+//            valueTwo = String.valueOf(edit_textExp.getText());
+//            newOp = "*";
+//            btn_porce.setImageResource(R.drawable.porcepress);
+//            edit_textExp.setText("");
 //
-//                    case "-":
-//                        String newResultMinus = String.valueOf(Integer.parseInt(valueOne) - Integer.parseInt(valueOne));
-//                        edit_textExp.setText(newResultMinus);
-//                        System.out.println("foi");
-//                        break;
+//        } else {
+//            valueOne = String.valueOf(edit_textExp.getText());
+//            btn_porce.setImageResource(R.drawable.porce);
+//        }
 //
-//                    default:
-//                        System.out.println("Entrou no switch");
-//                }
-//                String newResult = String.valueOf(Integer.parseInt(valueOne) + Integer.parseInt(valueOne));
-//                edit_textExp.setText(newResult);
+//        if (btn_dote.isPressed()) {
+//            //String result = String.valueOf(edit_textExp.getText());
+//
+//        }
 
-            } else {
-                System.out.println("bosta");
-            }
-        }
+
+
+
 
 
 
@@ -187,21 +157,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //logica do botão equals
-//    public void equals(){
-//        String valueOne = String.valueOf(edit_textExp.getText());
-//        String valueTwo = String.valueOf(edit_textExp.getText());
-//        if(btn_equals.isPressed()){
-//            if(valueOne.contains("+") || valueTwo.contains("+")){
-//                valueOne = valueOne.replaceAll("\\+", "");
-//                valueTwo = valueTwo.replaceAll("\\+", "");
-//                String newResult = String.valueOf(Integer.parseInt(valueOne) + Integer.parseInt(valueTwo));
-//                edit_textExp.setText(newResult);
-//                System.out.println("foi");
-//            }else{
-//                System.out.println("bosta");
-//            }
-//        }
-//    }
+    public void equals(){
+        if (valueTwo != null && valueOne != null) {
+            switch (newOp){
+                case "+":
+                    String newResultPlus = String.valueOf(Integer.parseInt(valueOne) + Integer.parseInt(valueTwo));
+                    edit_textExp.setText(newResultPlus);
+                    System.out.println("foi");
+                    break;
+
+                case "-":
+                    String newResultMinus = String.valueOf(Integer.parseInt(valueTwo) - Integer.parseInt(valueOne));
+                    edit_textExp.setText(newResultMinus);
+                    System.out.println("foi");
+                    break;
+
+                case "%":
+                    String newResultPor = String.valueOf(Integer.parseInt(valueTwo) % Integer.parseInt(valueOne));
+                    edit_textExp.setText(newResultPor);
+                    System.out.println("foi");
+                    break;
+
+                case "/":
+                    String newResultDiv = String.valueOf(Integer.parseInt(valueTwo) / Integer.parseInt(valueOne));
+                    edit_textExp.setText(newResultDiv);
+                    System.out.println("foi");
+                    break;
+
+                case "*":
+                    String newResultMul = String.valueOf(Integer.parseInt(valueTwo) * Integer.parseInt(valueOne));
+                    edit_textExp.setText(newResultMul);
+                    System.out.println("foi");
+                    break;
+
+                default:
+                    System.out.println("Entrou no switch");
+            }
+
+        } else {
+            System.out.println("bosta");
+        }
+    }
+
 
     //aqui esta todos os ids
     private void FindIds() {
@@ -268,8 +265,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             SetExpre("%", false);
         } else if (id == R.id.btn_sub) {
             SetExpre("-", false);
-        } else if (id == R.id.btn_equals) {
-            SetExpre("", false);
         }
 
 
